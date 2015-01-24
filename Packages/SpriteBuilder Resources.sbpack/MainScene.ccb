@@ -216,8 +216,6 @@
 								<string>Spinner.ccb</string>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -303,7 +301,7 @@
 				<key>displayName</key>
 				<string>Play Label</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_playLabel</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -510,6 +508,10 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -649,7 +651,7 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.0093755722045898438</real>
 			<key>position</key>
 			<real>0.0</real>
 			<key>resolution</key>

@@ -20,6 +20,9 @@
     
     // location in node
     CGPoint touchLocation;
+    
+    // labels
+    CCLabelTTF *_playLabel;
 }
 
 #pragma mark - View Initialization
@@ -45,7 +48,8 @@
     
     // check if spinner container was touched
     if (CGRectContainsPoint(_spinnerContainer.boundingBox, touchLocation)) {
-        [[_spinner animationManager] runAnimationsForSequenceNamed:@"Spin"];
+        _playLabel.visible = NO;
+        [[_spinner animationManager] runAnimationsForSequenceNamed:@"SpinFast"];
         self.userInteractionEnabled = NO;
         self.multipleTouchEnabled = NO;
     }
