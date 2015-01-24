@@ -26,10 +26,8 @@
 
 - (void)didLoadFromCCB
 {
-    NSLog(@"didload");
     self.userInteractionEnabled = YES;
-    self.multipleTouchEnabled = YES;
-    
+    self.multipleTouchEnabled = YES;    
 }
 
 - (void)onExit
