@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>1</integer>
+	<integer>3</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -162,7 +162,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>0.20000000298023224</real>
+									<real>0.1666666716337204</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -177,7 +177,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>0.43333333730697632</real>
+									<real>0.40000000596046448</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -207,7 +207,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>1</real>
+									<real>1.0666667222976685</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -436,66 +436,6 @@
 									<key>value</key>
 									<real>1080</real>
 								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>1</integer>
-									</dict>
-									<key>name</key>
-									<string>rotation</string>
-									<key>time</key>
-									<real>2.1666667461395264</real>
-									<key>type</key>
-									<integer>2</integer>
-									<key>value</key>
-									<real>1170</real>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>1</integer>
-									</dict>
-									<key>name</key>
-									<string>rotation</string>
-									<key>time</key>
-									<real>2.3333332538604736</real>
-									<key>type</key>
-									<integer>2</integer>
-									<key>value</key>
-									<real>1260</real>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>1</integer>
-									</dict>
-									<key>name</key>
-									<string>rotation</string>
-									<key>time</key>
-									<real>2.5</real>
-									<key>type</key>
-									<integer>2</integer>
-									<key>value</key>
-									<real>1350</real>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>1</integer>
-									</dict>
-									<key>name</key>
-									<string>rotation</string>
-									<key>time</key>
-									<real>2.6666667461395264</real>
-									<key>type</key>
-									<integer>2</integer>
-									<key>value</key>
-									<real>1440</real>
-								</dict>
 							</array>
 							<key>name</key>
 							<string>rotation</string>
@@ -572,7 +512,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>360</real>
+						<real>1440</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -819,7 +759,7 @@
 			<key>name</key>
 			<string>SpinMedium</string>
 			<key>offset</key>
-			<real>0.21322405338287354</real>
+			<real>0.0</real>
 			<key>position</key>
 			<real>1.5</real>
 			<key>resolution</key>
@@ -851,13 +791,13 @@
 			<key>chainedSequenceId</key>
 			<integer>2</integer>
 			<key>length</key>
-			<real>2.6666667461395264</real>
+			<real>2</real>
 			<key>name</key>
 			<string>SpinFast</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>2.6666667461395264</real>
+			<real>2</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
