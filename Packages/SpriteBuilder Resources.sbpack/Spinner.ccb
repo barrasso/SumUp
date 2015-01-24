@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -89,7 +89,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>1.2000000476837158</real>
+									<real>1.1666666269302368</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -104,7 +104,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>2</real>
+									<real>1.8666666746139526</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -162,7 +162,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>0.23333333432674408</real>
+									<real>0.20000000298023224</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -177,7 +177,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>0.5</real>
+									<real>0.43333333730697632</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -192,7 +192,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>0.83333331346511841</real>
+									<real>0.69999998807907104</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -207,7 +207,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>1.2000000476837158</real>
+									<real>1</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -222,7 +222,7 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>1.6666666269302368</real>
+									<real>1.5</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
@@ -572,7 +572,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>450</real>
+						<real>360</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -815,17 +815,17 @@
 			<key>chainedSequenceId</key>
 			<integer>1</integer>
 			<key>length</key>
-			<real>1.6666667461395264</real>
+			<real>1.5</real>
 			<key>name</key>
 			<string>SpinMedium</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.21322405338287354</real>
 			<key>position</key>
-			<real>1.6666667461395264</real>
+			<real>1.5</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>231.88763427734375</real>
+			<real>406.62078857421875</real>
 			<key>sequenceId</key>
 			<integer>2</integer>
 			<key>soundChannel</key>
