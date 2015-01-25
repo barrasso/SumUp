@@ -43,9 +43,9 @@
 
 - (void)didLoadFromCCB
 {
-    // enable interaction and multi touch
-    self.userInteractionEnabled = YES;
-    self.multipleTouchEnabled = YES;
+    // disable interaction and multi touch
+    self.userInteractionEnabled = NO;
+    self.multipleTouchEnabled = NO;
     
     // Get device screen size
     _screenSize = [[CCDirector sharedDirector] viewSize];
@@ -54,7 +54,7 @@
     // init flying numbers array
     _allFlyingNumbers = [[NSMutableArray alloc] init];
     
-    // load game
+    // start new game
     [self startNewGame];
 }
 
@@ -70,13 +70,46 @@
 {
     for (FlyingNumber *number in _allFlyingNumbers)
     {
-        if (CGRectContainsPoint(_centerNode.boundingBox, number.position)) {
+        // check if number hit center
+        if (CGRectContainsPoint(_centerNode.boundingBox, number.position))
+        {
             NSLog(@"hit center");
         }
     }
 }
 
+#pragma mark - Touch Handling Methods
+
+- (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+{
+    switch (_position)
+    {
+        case SpinnerPositionZero:
+            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate90"];
+            _position = SpinnerPositionOne;
+            break;
+        case SpinnerPositionOne:
+            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate180"];
+            _position = SpinnerPositionTwo;
+        case SpinnerPositionTwo:
+            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate270"];
+            _position = SpinnerPositionThree;
+        case SpinnerPositionThree:
+            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate360"];
+            _position = SpinnerPositionZero;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Game Utility Methods
+
+- (void)enableInteraction
+{
+    // disable interaction and multi touch
+    self.userInteractionEnabled = YES;
+    self.multipleTouchEnabled = YES;
+}
 
 - (void)startNewGame
 {
@@ -111,6 +144,7 @@
     _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
     [_flyingNumber.physicsBody applyForce:ccp(0.0f, -8000.f)];
     
+
     // add object to physics node and array
     [_allFlyingNumbers addObject:_flyingNumber];
     [_physicsNode addChild:_flyingNumber];
