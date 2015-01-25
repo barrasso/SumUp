@@ -8,6 +8,7 @@
 //
 
 #import "MainScene.h"
+#import "GameScene.h"
 #import "Spinner.h"
 
 @implementation MainScene
@@ -48,7 +49,6 @@
     
     // check if spinner container was touched
     if (CGRectContainsPoint(_spinnerContainer.boundingBox, touchLocation)) {
-        _playLabel.visible = NO;
         [[_spinner animationManager] runAnimationsForSequenceNamed:@"SpinFast"];
         self.userInteractionEnabled = NO;
         self.multipleTouchEnabled = NO;

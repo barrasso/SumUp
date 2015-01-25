@@ -10,13 +10,13 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>2</integer>
+	<integer>4</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>3</integer>
+	<integer>1</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -512,7 +512,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>1440</real>
+						<real>360</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -712,7 +712,24 @@
 			<key>callbackChannel</key>
 			<dict>
 				<key>keyframes</key>
-				<array/>
+				<array>
+					<dict>
+						<key>easing</key>
+						<dict>
+							<key>type</key>
+							<integer>0</integer>
+						</dict>
+						<key>time</key>
+						<real>3</real>
+						<key>type</key>
+						<integer>12</integer>
+						<key>value</key>
+						<array>
+							<string>fadeInGameScene</string>
+							<integer>1</integer>
+						</array>
+					</dict>
+				</array>
 				<key>type</key>
 				<integer>12</integer>
 			</dict>

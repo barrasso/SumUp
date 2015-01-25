@@ -10,4 +10,13 @@
 
 @implementation Spinner
 
+#pragma mark - Keyframe Selectors
+
+- (void)fadeInGameScene
+{
+    CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
+    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1.0];
+    [[CCDirector sharedDirector] replaceScene:gameScene withTransition:transition];
+}
+
 @end
