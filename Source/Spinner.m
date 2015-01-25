@@ -19,8 +19,6 @@
     self.bottomValue = arc4random () % 3 + 4;
     self.rightValue = -1;
     
-    
-    NSLog(@"test initiaaaa");
     return self;
 }
 

@@ -10,6 +10,7 @@
 
 @interface GameScene : CCNode
 
+// position of the spinner
 typedef NS_ENUM(NSInteger, SpinnerPosition)
 {
     SpinnerPositionZero = 0,

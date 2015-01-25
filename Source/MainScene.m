@@ -49,6 +49,7 @@
     
     // check if spinner container was touched
     if (CGRectContainsPoint(_spinnerContainer.boundingBox, touchLocation)) {
+        [[self animationManager] runAnimationsForSequenceNamed:@"FadePlay"];
         [[_spinner animationManager] runAnimationsForSequenceNamed:@"SpinFast"];
         self.userInteractionEnabled = NO;
         self.multipleTouchEnabled = NO;

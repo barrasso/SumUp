@@ -10,6 +10,7 @@
 		04CEADB01A744DD200947B0A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CEADAF1A744DD200947B0A /* Media.xcassets */; };
 		04CEADC11A74611800947B0A /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADC01A74611800947B0A /* GameScene.m */; };
 		04CEADD41A74AA9000947B0A /* Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADD31A74AA9000947B0A /* Spinner.m */; };
+		04CEADD81A75607A00947B0A /* FlyingNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADD71A75607A00947B0A /* FlyingNumber.m */; };
 		5B12100C19748281004C1E1D /* BridgeKitV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B12100B19748281004C1E1D /* BridgeKitV3.framework */; };
 		5B121029197484DA004C1E1D /* BridgeKitV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B12100B19748281004C1E1D /* BridgeKitV3.framework */; };
 		5B12102A197484DD004C1E1D /* DeditioActivity.java in Sources */ = {isa = PBXBuildFile; fileRef = 5B12101B19748413004C1E1D /* DeditioActivity.java */; };
@@ -164,6 +165,8 @@
 		04CEADC01A74611800947B0A /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Source/GameScene.m; sourceTree = "<group>"; };
 		04CEADD21A74AA9000947B0A /* Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Spinner.h; path = Source/Spinner.h; sourceTree = "<group>"; };
 		04CEADD31A74AA9000947B0A /* Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spinner.m; path = Source/Spinner.m; sourceTree = "<group>"; };
+		04CEADD61A75607A00947B0A /* FlyingNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlyingNumber.h; path = Source/FlyingNumber.h; sourceTree = "<group>"; };
+		04CEADD71A75607A00947B0A /* FlyingNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlyingNumber.m; path = Source/FlyingNumber.m; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100B19748281004C1E1D /* BridgeKitV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BridgeKitV3.framework; path = System/Library/Frameworks/BridgeKitV3.framework; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -303,6 +306,15 @@
 				04CEADD31A74AA9000947B0A /* Spinner.m */,
 			);
 			name = Spinner;
+			sourceTree = "<group>";
+		};
+		04CEADD51A75606800947B0A /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				04CEADD61A75607A00947B0A /* FlyingNumber.h */,
+				04CEADD71A75607A00947B0A /* FlyingNumber.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 		5B12100D197483EE004C1E1D /* res */ = {
@@ -469,6 +481,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				04CEADD51A75606800947B0A /* Objects */,
 				04CEADAB1A74460D00947B0A /* Spinner */,
 				04CEADA41A743B3B00947B0A /* Scenes */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
@@ -861,6 +874,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73789871807631A0076A88C /* main.m in Sources */,
+				04CEADD81A75607A00947B0A /* FlyingNumber.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				04CEADC11A74611800947B0A /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
