@@ -10,4 +10,20 @@
 
 @interface GameScene : CCNode
 
+typedef NS_ENUM(NSInteger, SpinnerPosition)
+{
+    SpinnerPositionZero = 0,
+    SpinnerPositionOne = 1,
+    SpinnerPositionTwo = 2,
+    SpinnerPositionThree = 3
+};
+
+// labels
+@property (strong, nonatomic) CCLabelTTF *topLabel;
+@property (strong, nonatomic) CCLabelTTF *rightLabel;
+@property (strong, nonatomic) CCLabelTTF *bottomLabel;
+@property (strong, nonatomic) CCLabelTTF *leftLabel;
+@property (strong, nonatomic) CCLabelTTF *sumLabel;
+@property (strong, nonatomic) CCLabelTTF *getSumLabel;
+
 @end

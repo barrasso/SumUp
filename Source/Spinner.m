@@ -9,18 +9,21 @@
 #import "Spinner.h"
 
 @implementation Spinner
-//
-//- (id)init
-//{
-//
-//    return self;
-//}
-//
-//- (id)initWithValues:(NSDictionary *)data
-//{
-//    
-//    return self;
-//}
+
+- (id)init
+{
+    self = [super init];
+        
+    self.topValue = arc4random() % 1 + 2;
+    self.leftValue = arc4random() % 2 + 3;
+    self.bottomValue = arc4random () % 3 + 4;
+    self.rightValue = -1;
+    
+    
+    NSLog(@"test initiaaaa");
+    return self;
+}
+
 - (void)fadeInGameScene
 {
     CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];

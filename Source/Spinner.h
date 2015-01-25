@@ -10,6 +10,9 @@
 
 @interface Spinner : CCNode
 
-
+@property (assign, nonatomic) int topValue;
+@property (assign, nonatomic) int leftValue;
+@property (assign, nonatomic) int bottomValue;
+@property (assign, nonatomic) int rightValue;
 
 @end

@@ -16,19 +16,21 @@
     
     // spinner
     Spinner *_spinner;
+    SpinnerPosition position;
     
-    // labels
-    CCLabelTTF *_centerLabel;
-    CCLabelTTF *_topLabel;
-    CCLabelTTF *_rightLabel;
-    CCLabelTTF *_bottomLabel;
-    CCLabelTTF *_leftLabel;
+    // sum values
+    int currentSumValue;
+    int currentGetValue;
     
-    CCLabelTTF *_sumLabel;
-    CCLabelTTF *_getSumLabel;
+    // game values
+    int timeAlive;
+    int numberOfComputations;
+    
+    // flags
+    BOOL isGameOver;
 }
 
-#pragma mark - View Initialization
+#pragma mark - Initialization
 
 - (void)didLoadFromCCB
 {
@@ -36,7 +38,9 @@
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
     
-    // load initial game setup
+    // load game
+    [self startNewGame];
+    
     
 }
 
@@ -44,6 +48,27 @@
 {
     // deallocate
     [super onExit];
+}
+
+- (void)startNewGame
+{
+    // reset values
+    isGameOver = NO;
+    timeAlive = 0;
+    numberOfComputations = 0;
+    currentSumValue = 0;
+    currentGetValue = ((arc4random() % 13) + 6);
+    position = SpinnerPositionOne;
+    
+    // set labels
+    self.sumLabel.string = [NSString stringWithFormat:@"%i",currentSumValue];
+    self.getSumLabel.string = [NSString stringWithFormat:@"%i",currentGetValue];
+    self.topLabel.string = [NSString stringWithFormat:@"+%i",_spinner.topValue];
+    self.leftLabel.string = [NSString stringWithFormat:@"+%i",_spinner.leftValue];
+    self.bottomLabel.string = [NSString stringWithFormat:@"+%i",_spinner.bottomValue];
+    self.rightLabel.string = [NSString stringWithFormat:@"%i",_spinner.rightValue];
+
+
 }
 
 @end
