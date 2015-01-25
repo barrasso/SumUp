@@ -10,4 +10,6 @@
 
 @interface Spinner : CCNode
 
+
+
 @end

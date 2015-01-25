@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04CEADAE1A74461B00947B0A /* Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADAD1A74461B00947B0A /* Spinner.m */; };
 		04CEADB01A744DD200947B0A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CEADAF1A744DD200947B0A /* Media.xcassets */; };
 		04CEADC11A74611800947B0A /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADC01A74611800947B0A /* GameScene.m */; };
+		04CEADC51A749E3700947B0A /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADC41A749E3700947B0A /* GameState.m */; };
+		04CEADD41A74AA9000947B0A /* Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADD31A74AA9000947B0A /* Spinner.m */; };
 		5B12100C19748281004C1E1D /* BridgeKitV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B12100B19748281004C1E1D /* BridgeKitV3.framework */; };
 		5B121029197484DA004C1E1D /* BridgeKitV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B12100B19748281004C1E1D /* BridgeKitV3.framework */; };
 		5B12102A197484DD004C1E1D /* DeditioActivity.java in Sources */ = {isa = PBXBuildFile; fileRef = 5B12101B19748413004C1E1D /* DeditioActivity.java */; };
@@ -159,11 +160,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04CEADAC1A74461B00947B0A /* Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Spinner.h; path = Source/Spinner.h; sourceTree = "<group>"; };
-		04CEADAD1A74461B00947B0A /* Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spinner.m; path = Source/Spinner.m; sourceTree = "<group>"; };
 		04CEADAF1A744DD200947B0A /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		04CEADBF1A74611800947B0A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Source/GameScene.h; sourceTree = "<group>"; };
 		04CEADC01A74611800947B0A /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Source/GameScene.m; sourceTree = "<group>"; };
+		04CEADC31A749E3700947B0A /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = Source/GameState.h; sourceTree = "<group>"; };
+		04CEADC41A749E3700947B0A /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameState.m; path = Source/GameState.m; sourceTree = "<group>"; };
+		04CEADD21A74AA9000947B0A /* Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Spinner.h; path = Source/Spinner.h; sourceTree = "<group>"; };
+		04CEADD31A74AA9000947B0A /* Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spinner.m; path = Source/Spinner.m; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100B19748281004C1E1D /* BridgeKitV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BridgeKitV3.framework; path = System/Library/Frameworks/BridgeKitV3.framework; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -299,10 +302,19 @@
 		04CEADAB1A74460D00947B0A /* Spinner */ = {
 			isa = PBXGroup;
 			children = (
-				04CEADAC1A74461B00947B0A /* Spinner.h */,
-				04CEADAD1A74461B00947B0A /* Spinner.m */,
+				04CEADD21A74AA9000947B0A /* Spinner.h */,
+				04CEADD31A74AA9000947B0A /* Spinner.m */,
 			);
 			name = Spinner;
+			sourceTree = "<group>";
+		};
+		04CEADC21A749E2100947B0A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				04CEADC31A749E3700947B0A /* GameState.h */,
+				04CEADC41A749E3700947B0A /* GameState.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		5B12100D197483EE004C1E1D /* res */ = {
@@ -469,6 +481,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				04CEADC21A749E2100947B0A /* Models */,
 				04CEADAB1A74460D00947B0A /* Spinner */,
 				04CEADA41A743B3B00947B0A /* Scenes */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
@@ -861,10 +874,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73789871807631A0076A88C /* main.m in Sources */,
+				04CEADC51A749E3700947B0A /* GameState.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				04CEADC11A74611800947B0A /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
-				04CEADAE1A74461B00947B0A /* Spinner.m in Sources */,
+				04CEADD41A74AA9000947B0A /* Spinner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

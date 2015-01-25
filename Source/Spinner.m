@@ -9,13 +9,22 @@
 #import "Spinner.h"
 
 @implementation Spinner
-
-#pragma mark - Keyframe Selectors
-
+//
+//- (id)init
+//{
+//
+//    return self;
+//}
+//
+//- (id)initWithValues:(NSDictionary *)data
+//{
+//    
+//    return self;
+//}
 - (void)fadeInGameScene
 {
     CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
-    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1.0];
+    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1];
     [[CCDirector sharedDirector] replaceScene:gameScene withTransition:transition];
 }
 
