@@ -68,12 +68,35 @@
 
 - (void)update:(CCTime)delta
 {
-    for (FlyingNumber *number in _allFlyingNumbers)
-    {
-        // check if number hit center
-        if (CGRectContainsPoint(_centerNode.boundingBox, number.position))
+    // if its not over
+    if (!_isGameOver) {
+        
+        for (FlyingNumber *number in _allFlyingNumbers)
         {
-            NSLog(@"hit center");
+            // check if number hit center
+            if (CGRectContainsPoint(_centerNode.boundingBox, number.position))
+            {
+                // run single pulse spinner animation
+                [_spinner.animationManager runAnimationsForSequenceNamed:@"SinglePulse"];
+                
+                // update sum label
+                _currentSumValue = _currentSumValue + number.numberValue + _spinner.topValue;
+                _sumLabel.string = [NSString stringWithFormat:@"%i",_currentSumValue];
+                
+                // check for 'loss' or 'next get' condition
+                [self checkGameScore:_currentSumValue];
+                
+                // must remove from numers array
+                [_allFlyingNumbers removeObject:number];
+                
+                // remove number
+                [number removeFromParent];
+                
+                // schedule a new number spawn on timer if game isnt over
+                if (!_isGameOver) {
+                    [self scheduleOnce:@selector(spawnInitialNumber) delay:0.1];
+                }
+            }
         }
     }
 }
@@ -85,31 +108,51 @@
     switch (_position)
     {
         case SpinnerPositionZero:
+            // rotate spinner and change position
             [[self animationManager] runAnimationsForSequenceNamed:@"Rotate90"];
             _position = SpinnerPositionOne;
+            
+            // shift numbers and update labels
+            [self shiftSpinnerValues];
+            [self updateSpinnerLabels];
+            
             break;
         case SpinnerPositionOne:
+            // rotate spinner and change position
             [[self animationManager] runAnimationsForSequenceNamed:@"Rotate180"];
             _position = SpinnerPositionTwo;
+            
+            // shift numbers and update labels
+            [self shiftSpinnerValues];
+            [self updateSpinnerLabels];
+            
+            break;
         case SpinnerPositionTwo:
+            // rotate spinner and change position
             [[self animationManager] runAnimationsForSequenceNamed:@"Rotate270"];
             _position = SpinnerPositionThree;
+            
+            // shift numbers and update labels
+            [self shiftSpinnerValues];
+            [self updateSpinnerLabels];
+            
+            break;
         case SpinnerPositionThree:
+            // rotate spinner and change position
             [[self animationManager] runAnimationsForSequenceNamed:@"Rotate360"];
             _position = SpinnerPositionZero;
+            
+            // shift numbers and update labels
+            [self shiftSpinnerValues];
+            [self updateSpinnerLabels];
+            
+            break;
         default:
             break;
     }
 }
 
 #pragma mark - Game Utility Methods
-
-- (void)enableInteraction
-{
-    // disable interaction and multi touch
-    self.userInteractionEnabled = YES;
-    self.multipleTouchEnabled = YES;
-}
 
 - (void)startNewGame
 {
@@ -133,6 +176,77 @@
     self.rightLabel.string = [NSString stringWithFormat:@"%i",_spinner.rightValue];
 }
 
+- (void)checkGameScore:(int)currentSum
+{
+    if (currentSum > _currentGetValue)
+    {
+        CCLOG(@"YOU LOSE");
+        
+        // game over
+        _isGameOver = YES;
+    }
+    else if (currentSum == _currentGetValue)
+    {
+        CCLOG(@"NEXT!");
+        
+        // increase get value and update label
+        _currentGetValue = (_currentGetValue + ((arc4random() % _currentGetValue) + (_currentGetValue * 1/2)));
+        _getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
+        
+        // increase spinner values and update labels
+        
+        
+        // increase flying number values, speed and update labels
+        
+    }
+}
+
+- (void)enableInteraction
+{
+    // disable interaction and multi touch
+    self.userInteractionEnabled = YES;
+    self.multipleTouchEnabled = YES;
+}
+
+- (void)shiftSpinnerValues
+{
+    int tempTop = _spinner.topValue;
+    int tempRight = _spinner.rightValue;
+    int tempBottom = _spinner.bottomValue;
+    int tempLeft = _spinner.leftValue;
+    _spinner.topValue = tempLeft;
+    _spinner.rightValue = tempTop;
+    _spinner.bottomValue = tempRight;
+    _spinner.leftValue = tempBottom;
+}
+
+- (void)updateSpinnerLabels
+{
+    if (_spinner.topValue > 0) {
+        self.topLabel.string = [NSString stringWithFormat:@"+%i",_spinner.topValue];
+    } else {
+        self.topLabel.string = [NSString stringWithFormat:@"%i",_spinner.topValue];
+    }
+    
+    if (_spinner.rightValue > 0) {
+        self.rightLabel.string = [NSString stringWithFormat:@"+%i",_spinner.rightValue];
+    } else {
+        self.rightLabel.string = [NSString stringWithFormat:@"%i",_spinner.rightValue];
+    }
+    
+    if (_spinner.bottomValue > 0) {
+        self.bottomLabel.string = [NSString stringWithFormat:@"+%i",_spinner.bottomValue];
+    } else {
+        self.bottomLabel.string = [NSString stringWithFormat:@"%i",_spinner.bottomValue];
+    }
+    
+    if (_spinner.leftValue > 0) {
+        self.leftLabel.string = [NSString stringWithFormat:@"+%i",_spinner.leftValue];
+    } else {
+        self.leftLabel.string = [NSString stringWithFormat:@"%i",_spinner.leftValue];
+    }
+}
+
 #pragma mark - Flying Number Methods
 
 - (void)spawnInitialNumber
@@ -142,9 +256,8 @@
     _flyingNumber.numberValue = arc4random() % 2 + 2;
     _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
     _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
-    [_flyingNumber.physicsBody applyForce:ccp(0.0f, -8000.f)];
+    [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
     
-
     // add object to physics node and array
     [_allFlyingNumbers addObject:_flyingNumber];
     [_physicsNode addChild:_flyingNumber];
