@@ -15,8 +15,8 @@
     self = [super init];
         
     self.topValue = arc4random() % 1 + 2;
-    self.leftValue = arc4random() % 2 + 3;
-    self.bottomValue = arc4random () % 3 + 4;
+    self.leftValue = 0;
+    self.bottomValue = arc4random () % 3 + 3;
     self.rightValue = -1;
     
     return self;

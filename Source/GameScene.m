@@ -18,11 +18,13 @@
     CCNode *_spinnerContainer;
     CCNode *_centerNode;
     
-    
     // numbers
     FlyingNumber *_flyingNumber;
     CCPhysicsNode *_physicsNode;
     NSMutableArray *_allFlyingNumbers;
+    
+    // temp number value
+    int tempValue;
     
     // Screen Size
     CGSize _screenSize;
@@ -30,6 +32,7 @@
     // sum values
     int _currentSumValue;
     int _currentGetValue;
+    int numberofGets;
     
     // game values
     int _timeAlive;
@@ -76,26 +79,32 @@
             // check if number hit center
             if (CGRectContainsPoint(_centerNode.boundingBox, number.position))
             {
+                // do particle effect on number position??????
+                tempValue = number.numberValue;
+
+                // deal with number
+                number.visible = NO;
+                number.position = CGPointMake(_screenSize.width * 1.5, _screenSize.height * 1.5);
+                
                 // run single pulse spinner animation
                 [_spinner.animationManager runAnimationsForSequenceNamed:@"SinglePulse"];
                 
                 // update sum label
-                _currentSumValue = _currentSumValue + number.numberValue + _spinner.topValue;
-                _sumLabel.string = [NSString stringWithFormat:@"%i",_currentSumValue];
+                if (_spinner.topValue != 0) {
+                    _currentSumValue = _currentSumValue + number.numberValue + _spinner.topValue;
+                    _sumLabel.string = [NSString stringWithFormat:@"%i",_currentSumValue];
+                } else {
+                    // play 0 animation?
+                }
                 
-                // check for 'loss' or 'next get' condition
-                [self checkGameScore:_currentSumValue];
-                
-                // must remove from numers array
+                // must remove from numaers array
                 [_allFlyingNumbers removeObject:number];
                 
                 // remove number
                 [number removeFromParent];
                 
-                // schedule a new number spawn on timer if game isnt over
-                if (!_isGameOver) {
-                    [self scheduleOnce:@selector(spawnInitialNumber) delay:0.1];
-                }
+                // check for 'loss' or 'next get' condition
+                [self checkGameScore:_currentSumValue];
             }
         }
     }
@@ -190,15 +199,206 @@
         CCLOG(@"NEXT!");
         
         // increase get value and update label
-        _currentGetValue = (_currentGetValue + ((arc4random() % _currentGetValue) + (_currentGetValue * 1/2)));
+        _currentGetValue = (_currentGetValue + ((arc4random() % _currentGetValue) + (_currentGetValue * 2)));
         _getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
         
-        // increase spinner values and update labels
+        // increment get
+        _numberOfComputations++;
         
+        // chceck number of gets
+        switch (_numberOfComputations) {
+            case 1:
+                // increase spinner values and update labels
+                _spinner.topValue = _spinner.topValue +  (_spinner.topValue * 2);
+                _spinner.bottomValue = _spinner.bottomValue + (_spinner.bottomValue * 2);
+                _topLabel.string = [NSString stringWithFormat:@"%i",_spinner.topValue];
+                _bottomLabel.string = [NSString stringWithFormat:@"%i",_spinner.bottomValue];
+                
+                // spawn new flying number
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                
+                // increase flying number values, speed and update labels
+                _flyingNumber.numberValue = arc4random() % 4 + 4;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12500.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                
+                break;
+            case 2:
+                // increase spinner values and update labels
+                _spinner.topValue = _spinner.topValue +  (_spinner.topValue * 2);
+                _spinner.bottomValue = _spinner.bottomValue + (_spinner.bottomValue * 2);
+                _topLabel.string = [NSString stringWithFormat:@"%i",_spinner.topValue];
+                _bottomLabel.string = [NSString stringWithFormat:@"%i",_spinner.bottomValue];
+                
+                // spawn new flying number
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                
+                // increase flying number values, speed and update labels
+                _flyingNumber.numberValue = arc4random() % 8 + 8;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -13000.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            case 3:
+                // increase spinner values and update labels
+                _spinner.topValue = _spinner.topValue +  (_spinner.topValue * 2);
+                _spinner.bottomValue = _spinner.bottomValue + (_spinner.bottomValue * 2);
+                _topLabel.string = [NSString stringWithFormat:@"%i",_spinner.topValue];
+                _bottomLabel.string = [NSString stringWithFormat:@"%i",_spinner.bottomValue];
+                
+                // spawn new flying number
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                
+                // increase flying number values, speed and update labels
+                _flyingNumber.numberValue = arc4random() % 8 + 8;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -13500.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            case 4:
+                // increase spinner values and update labels
+                _spinner.topValue = _spinner.topValue +  (_spinner.topValue * 2);
+                _spinner.bottomValue = _spinner.bottomValue + (_spinner.bottomValue * 2);
+                _topLabel.string = [NSString stringWithFormat:@"%i",_spinner.topValue];
+                _bottomLabel.string = [NSString stringWithFormat:@"%i",_spinner.bottomValue];
+                
+                // spawn new flying number
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                
+                // increase flying number values, speed and update labels
+                _flyingNumber.numberValue = arc4random() % 16 + 16;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -14000.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            case 5:
+                // increase spinner values and update labels
+                _spinner.topValue = _spinner.topValue +  (_spinner.topValue * 2);
+                _spinner.bottomValue = _spinner.bottomValue + (_spinner.bottomValue * 2);
+                _topLabel.string = [NSString stringWithFormat:@"%i",_spinner.topValue];
+                _bottomLabel.string = [NSString stringWithFormat:@"%i",_spinner.bottomValue];
+                
+                // spawn new flying number
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                
+                // increase flying number values, speed and update labels
+                _flyingNumber.numberValue = arc4random() % 32 + 32;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -14500.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            default:
+                break;
+        }
+    }
+    else if (currentSum < _currentGetValue) {
         
-        // increase flying number values, speed and update labels
+        // chceck number of gets
+        switch (_numberOfComputations) {
+            case 0:
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                _flyingNumber.numberValue = arc4random() % 2 + 2;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+                
+            case 1:
+                // spawn new flying number
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                
+                // increase flying number values, speed and update labels
+                _flyingNumber.numberValue = arc4random() % 4 + 4;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12500.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            case 2:
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                _flyingNumber.numberValue = arc4random() % 8 + 8;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            case 3:
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                _flyingNumber.numberValue = arc4random() % 16 + 16;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            case 4:
+                // init flying number
+                _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+                _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+                _flyingNumber.numberValue = arc4random() % 32 + 32;
+                _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+                [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
+                
+                // add object to physics node and array
+                [_allFlyingNumbers addObject:_flyingNumber];
+                [_physicsNode addChild:_flyingNumber];
+                break;
+            default:
+                break;
+        }
         
     }
+
 }
 
 - (void)enableInteraction
@@ -253,8 +453,8 @@
 {
     // init flying number
     _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
-    _flyingNumber.numberValue = arc4random() % 2 + 2;
     _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+    _flyingNumber.numberValue = arc4random() % 2 + 2;
     _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
     [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
     
