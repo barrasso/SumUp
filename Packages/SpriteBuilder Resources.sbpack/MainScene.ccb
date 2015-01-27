@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>8</integer>
+	<integer>10</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -216,6 +216,8 @@
 								<string>Spinner.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -257,8 +259,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.69999998807907104</real>
-							<real>0.34999999403953552</real>
+							<real>0.80000001192092896</real>
+							<real>0.40000000596046448</real>
 							<integer>2</integer>
 							<integer>2</integer>
 						</array>
@@ -566,8 +568,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>

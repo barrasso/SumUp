@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>4</integer>
+	<integer>0</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -594,7 +594,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>GameAssets/deditio-spinner.png</string>
+							<string>GameAssets/sum-spinner.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -812,7 +812,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>3</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
@@ -846,7 +846,7 @@
 			<key>name</key>
 			<string>SpinMedium</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.046557307243347168</real>
 			<key>position</key>
 			<real>1.5</real>
 			<key>resolution</key>
