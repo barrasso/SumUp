@@ -15,4 +15,6 @@
 @property (assign, nonatomic) int bottomValue;
 @property (assign, nonatomic) int rightValue;
 
+- (void)updateSpinnerValues:(Spinner *)spinner andCurrentGet:(int)getValue andNumberOfGets:(int)numberOfGets;
+
 @end

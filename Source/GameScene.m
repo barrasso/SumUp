@@ -22,21 +22,17 @@
     FlyingNumber *_flyingNumber;
     CCPhysicsNode *_physicsNode;
     NSMutableArray *_allFlyingNumbers;
-    
-    // temp number value
-    int tempValue;
-    
+
     // Screen Size
     CGSize _screenSize;
     
     // sum values
     int _currentSumValue;
     int _currentGetValue;
-    int numberofGets;
     
     // game values
     int _timeAlive;
-    int _numberOfComputations;
+    int _numberOfGets;
     
     // flags
     BOOL _isGameOver;
@@ -80,7 +76,6 @@
             if (CGRectContainsPoint(_centerNode.boundingBox, number.position))
             {
                 // do particle effect on number position??????
-                tempValue = number.numberValue;
 
                 // deal with number
                 number.visible = NO;
@@ -97,7 +92,7 @@
                     // play 0 animation?
                 }
                 
-                // must remove from numaers array
+                // must remove from numbers array
                 [_allFlyingNumbers removeObject:number];
                 
                 // remove number
@@ -168,7 +163,7 @@
     // reset values
     _isGameOver = NO;
     _timeAlive = 0;
-    _numberOfComputations = 0;
+    _numberOfGets = 0;
     _currentSumValue = 0;
     _currentGetValue = ((arc4random() % 13) + 6);
     _position = SpinnerPositionZero;
@@ -179,10 +174,7 @@
     // set labels
     self.sumLabel.string = [NSString stringWithFormat:@"%i",_currentSumValue];
     self.getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
-    self.topLabel.string = [NSString stringWithFormat:@"+%i",_spinner.topValue];
-    self.leftLabel.string = [NSString stringWithFormat:@"+%i",_spinner.leftValue];
-    self.bottomLabel.string = [NSString stringWithFormat:@"+%i",_spinner.bottomValue];
-    self.rightLabel.string = [NSString stringWithFormat:@"%i",_spinner.rightValue];
+    [self updateSpinnerLabels];
 }
 
 - (void)checkGameScore:(int)currentSum
@@ -198,15 +190,24 @@
     {
         CCLOG(@"NEXT!");
         
-        // increase get value and update label
+        // calculate new get value and update label
+        
+        
         _currentGetValue = (_currentGetValue + ((arc4random() % _currentGetValue) + (_currentGetValue * 2)));
         _getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
         
-        // increment get
-        _numberOfComputations++;
+        // increment number of gets
+        _numberOfGets++;
         
-        // chceck number of gets
-        switch (_numberOfComputations) {
+        // based on get value and number of gets, update the spinner values and flying numbers
+        // also update labels
+        
+        
+        // spawn new flying number
+        
+        
+        // check number of gets
+        switch (_numberOfGets) {
             case 1:
                 // increase spinner values and update labels
                 _spinner.topValue = _spinner.topValue +  (_spinner.topValue * 2);
@@ -327,8 +328,14 @@
     }
     else if (currentSum < _currentGetValue) {
         
+        // update flying number value and label based on currentget & spinner values
+        
+        
+        // spawn a new flying number
+        
+        
         // chceck number of gets
-        switch (_numberOfComputations) {
+        switch (_numberOfGets) {
             case 0:
                 // init flying number
                 _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
@@ -396,14 +403,12 @@
             default:
                 break;
         }
-        
     }
-
 }
 
 - (void)enableInteraction
 {
-    // disable interaction and multi touch
+    // enable interaction and multi touch
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
 }
