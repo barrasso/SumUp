@@ -15,7 +15,6 @@
     // spinner
     Spinner *_spinner;
     SpinnerPosition _position;
-    CCNode *_spinnerContainer;
     CCNode *_centerNode;
     
     // numbers
@@ -240,9 +239,11 @@
         // spawn new flying number with updated value
         _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
         [_flyingNumber updateNumber:_flyingNumber basedOn:_spinner andGetValue:_currentGetValue andNumberOfGets:_numberOfGets andPosition:_screenSize];
-        _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
         [_allFlyingNumbers addObject:_flyingNumber];
         [_physicsNode addChild:_flyingNumber];
+        
+        // reset sum
+        _currentSumValue = 0;
     }
 }
 
@@ -251,21 +252,23 @@
     // do particle effect on number position??????
     
     
-    // deal with number
+    // deal with number (so update doesn't call again)
     number.visible = NO;
     number.position = CGPointMake(_screenSize.width * 1.5, _screenSize.height * 1.5);
     
     // run single pulse spinner animation
     [_spinner.animationManager runAnimationsForSequenceNamed:@"SinglePulse"];
     
+    // figure out user sum
+    _currentSumValue = number.numberValue + _spinner.topValue;
+    
     // update score label
-    _currentSumValue = _currentSumValue + number.numberValue + _spinner.topValue;
     self.scoreLabel.string = [NSString stringWithFormat:@"%i",_numberOfGets];
     
     // play +1 score animation????????
     
     
-    // must remove from numbers array
+    // must number remove from scene
     [_allFlyingNumbers removeObject:number];
     [number removeFromParent];
 }
