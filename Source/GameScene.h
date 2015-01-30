@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, SpinnerPosition)
 @property (strong, nonatomic) CCLabelTTF *rightLabel;
 @property (strong, nonatomic) CCLabelTTF *bottomLabel;
 @property (strong, nonatomic) CCLabelTTF *leftLabel;
-@property (strong, nonatomic) CCLabelTTF *sumLabel;
+@property (strong, nonatomic) CCLabelTTF *scoreLabel;
 @property (strong, nonatomic) CCLabelTTF *getSumLabel;
 
 @end

@@ -10,6 +10,8 @@
 
 @implementation Spinner
 
+#pragma mark - Initialization
+
 - (id)init
 {
     self = [super init];
@@ -22,11 +24,15 @@
     return self;
 }
 
+#pragma mark - Spawning Methods
+
 - (void)updateSpinnerValues:(Spinner *)spinner andCurrentGet:(int)getValue andNumberOfGets:(int)numberOfGets
 {
     // based on get value and number of gets, update new spinner values
     
 }
+
+#pragma mark - Navigation Methods
 
 - (void)fadeInGameScene
 {
