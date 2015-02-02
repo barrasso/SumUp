@@ -152,16 +152,29 @@
 
 - (void)spawnInitialNumber
 {
-    // init flying number
-    _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
-    _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
-    _flyingNumber.numberValue = arc4random() % 2 + 2;
-    _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
-    [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
     
-    // add object to physics node and array
+    // update the spinner values and labels
+    [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
+    [self updateSpinnerLabels];
+    
+    // spawn new flying number with updated value
+    _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+    [_flyingNumber updateNumber:_flyingNumber withNewValue:[_spinner calculateNewNumberValue:_spinner withCurrentGetValue:_currentGetValue]];
+    
+    // determine position and add to game
+    _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
     [_allFlyingNumbers addObject:_flyingNumber];
     [_physicsNode addChild:_flyingNumber];
+//    // init flying number
+//    _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+//    _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+//    _flyingNumber.numberValue = arc4random() % 2 + 2;
+//    _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
+//    [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
+//    
+//    // add object to physics node and array
+//    [_allFlyingNumbers addObject:_flyingNumber];
+//    [_physicsNode addChild:_flyingNumber];
 }
 
 - (void)enableInteraction
@@ -233,12 +246,15 @@
         _numberOfGets++;
         
         // update the spinner values and labels
-        [_spinner updateSpinnerValues:_spinner andCurrentGet:_currentGetValue andNumberOfGets:_numberOfGets];
+        [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
         [self updateSpinnerLabels];
         
         // spawn new flying number with updated value
         _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
-        [_flyingNumber updateNumber:_flyingNumber basedOn:_spinner andGetValue:_currentGetValue andNumberOfGets:_numberOfGets andPosition:_screenSize];
+        [_flyingNumber updateNumber:_flyingNumber withNewValue:[_spinner calculateNewNumberValue:_spinner withCurrentGetValue:_currentGetValue]];
+        
+        // determine position and add to game
+        _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
         [_allFlyingNumbers addObject:_flyingNumber];
         [_physicsNode addChild:_flyingNumber];
         
@@ -271,6 +287,13 @@
     // must number remove from scene
     [_allFlyingNumbers removeObject:number];
     [number removeFromParent];
+}
+
+- (void)retry
+{
+    CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
+    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1];
+    [[CCDirector sharedDirector] replaceScene:gameScene withTransition:transition];
 }
 
 @end

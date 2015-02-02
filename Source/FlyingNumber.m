@@ -13,13 +13,10 @@
 
 #pragma mark - Spawning Methods
 
-- (void)updateNumber:(FlyingNumber *)number basedOn:(Spinner *)spinner andGetValue:(int)getValue andNumberOfGets:(int)numberOfGets andPosition:(CGSize)screenSize
+- (void)updateNumber:(FlyingNumber *)number withNewValue:(int)value
 {
-    // based on get value and spinner values, update flying number value
-    
-    
-    self.position = CGPointMake(screenSize.width * 0.5, screenSize.height * 1.2);
-    self.numberValue = arc4random() % 2 + 2;
+    // update flying number value
+    self.numberValue = value;
     [self.physicsBody applyForce:ccp(0.0f, -12000.f)];
     self.numberLabel.string = [NSString stringWithFormat:@"%i",self.numberValue];
 }

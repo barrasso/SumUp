@@ -15,8 +15,7 @@
 @property (assign, nonatomic) int numberValue;
 @property (strong, nonatomic) CCLabelTTF *numberLabel;
 
-// spawning
-- (void)updateNumber:(FlyingNumber *)number basedOn:(Spinner *)spinner
-         andGetValue:(int)getValue andNumberOfGets:(int)numberOfGets andPosition:(CGSize)screenSize;
+// scaling
+- (void)updateNumber:(FlyingNumber *)number withNewValue:(int)value;
 
 @end
