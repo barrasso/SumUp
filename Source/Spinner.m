@@ -5,6 +5,7 @@
 //  Created by Mark on 1/24/15.
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
+static const float scalingValue = 0.50f;
 
 #import "Spinner.h"
 
@@ -16,39 +17,27 @@
 {
     self = [super init];
     
-    self.topValue = arc4random() % 1 + 2;
-    self.leftValue = arc4random() % 1;
-    self.bottomValue = arc4random () % 3 + 3;
-    self.rightValue = -1;
+    self.topValue = arc4random() % 2 + 2;
+    self.leftValue = arc4random() % 2 + 3;
+    self.bottomValue = arc4random () % 3 + 4;
+    self.rightValue = arc4random() % 1 - 3;
     
     return self;
 }
 
 #pragma mark - Scaling Methods
 
-- (void)updateSpinnerValues:(Spinner *)spinner withNumberOfGets:(int)numberOfGets
+- (Spinner *)updateSpinnerValues:(Spinner *)spinner withNumberOfGets:(int)numberOfGets
 {
-    // update new spinner values
+    if (numberOfGets !=0 ) {
     
-    spinner.topValue = spinner.topValue * 2;
-    spinner.leftValue = spinner.leftValue * 2;
-    spinner.bottomValue = spinner.bottomValue * 2;
-    spinner.rightValue = spinner.rightValue * 2;
-    
-//    switch (numberOfGets) {
-//        case 0:
-//            // do nothing
-//            break;
-//        case 1:
-//            self.topValue = self.topValue * 2;
-//            self.leftValue = self.leftValue * 2;
-//            self.bottomValue = self.bottomValue * 2;
-//            self.rightValue = self.rightValue * 2;
-//
-//            break;
-//        default:
-//            break;
-//    }
+        // update new spinner values
+        spinner.topValue = spinner.topValue + spinner.topValue * scalingValue;
+        spinner.leftValue = spinner.leftValue + spinner.leftValue * scalingValue;
+        spinner.bottomValue = spinner.bottomValue + spinner.bottomValue * scalingValue;
+        spinner.rightValue = spinner.rightValue + spinner.rightValue * scalingValue;
+    }
+    return spinner;
 }
 
 - (int)calculateNewNumberValue:(Spinner *)spinner withCurrentGetValue:(int)getValue

@@ -10,10 +10,13 @@
 #import "FlyingNumber.h"
 #import "Spinner.h"
 
+static const float scalingValue = 0.50f;
+
 @implementation GameScene
 {
     // spinner
     Spinner *_spinner;
+    CCNode *_spinnerContainer;
     SpinnerPosition _position;
     CCNode *_centerNode;
     
@@ -138,7 +141,7 @@
     _isGameOver = NO;
     _numberOfGets = 0;
     _currentSumValue = 0;
-    _currentGetValue = ((arc4random() % 13) + 6);
+    _currentGetValue = ((arc4random() % 4) + 4);
     _position = SpinnerPositionZero;
 
     // spawn initial number
@@ -152,9 +155,8 @@
 
 - (void)spawnInitialNumber
 {
-    
     // update the spinner values and labels
-    [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
+    _spinner = [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
     [self updateSpinnerLabels];
     
     // spawn new flying number with updated value
@@ -165,16 +167,6 @@
     _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
     [_allFlyingNumbers addObject:_flyingNumber];
     [_physicsNode addChild:_flyingNumber];
-//    // init flying number
-//    _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
-//    _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
-//    _flyingNumber.numberValue = arc4random() % 2 + 2;
-//    _flyingNumber.numberLabel.string = [NSString stringWithFormat:@"%i",_flyingNumber.numberValue];
-//    [_flyingNumber.physicsBody applyForce:ccp(0.0f, -12000.f)];
-//    
-//    // add object to physics node and array
-//    [_allFlyingNumbers addObject:_flyingNumber];
-//    [_physicsNode addChild:_flyingNumber];
 }
 
 - (void)enableInteraction
@@ -239,14 +231,15 @@
         CCLOG(@"NEXT!");
         
         // calculate new get value and update label
-        _currentGetValue = (_currentGetValue + ((arc4random() % _currentGetValue) + (_currentGetValue * 2)));
+        _currentGetValue = (_currentGetValue + _currentGetValue * scalingValue);
         self.getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
         
         // increment number of gets
         _numberOfGets++;
+        self.scoreLabel.string = [NSString stringWithFormat:@"%i",_numberOfGets];
         
         // update the spinner values and labels
-        [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
+        _spinner = [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
         [self updateSpinnerLabels];
         
         // spawn new flying number with updated value
@@ -294,6 +287,11 @@
     CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
     CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1];
     [[CCDirector sharedDirector] replaceScene:gameScene withTransition:transition];
+}
+
+- (void)doCrazyStuffEachScoreIncrement
+{
+    
 }
 
 @end

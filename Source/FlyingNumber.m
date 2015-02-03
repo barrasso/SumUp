@@ -17,7 +17,7 @@
 {
     // update flying number value
     self.numberValue = value;
-    [self.physicsBody applyForce:ccp(0.0f, -12000.f)];
+    [self.physicsBody applyForce:ccp(0.0f, -10000.f)];
     self.numberLabel.string = [NSString stringWithFormat:@"%i",self.numberValue];
 }
 
