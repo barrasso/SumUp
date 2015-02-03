@@ -5,7 +5,6 @@
 //  Created by Mark on 1/24/15.
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
-static const float scalingValue = 0.50f;
 
 #import "Spinner.h"
 
@@ -18,8 +17,8 @@ static const float scalingValue = 0.50f;
     self = [super init];
     
     self.topValue = arc4random() % 2 + 2;
-    self.leftValue = arc4random() % 2 + 3;
-    self.bottomValue = arc4random () % 3 + 4;
+    self.leftValue = arc4random() % 3 + 3;
+    self.bottomValue = arc4random () % 4 + 4;
     self.rightValue = arc4random() % 1 - 3;
     
     return self;
@@ -27,16 +26,20 @@ static const float scalingValue = 0.50f;
 
 #pragma mark - Scaling Methods
 
-- (Spinner *)updateSpinnerValues:(Spinner *)spinner withNumberOfGets:(int)numberOfGets
+- (Spinner *)updateSpinnerValues:(Spinner *)spinner withGetValue:(int)getValue
 {
-    if (numberOfGets !=0 ) {
+    int range = 5;
+    int multiplier = 5;
     
-        // update new spinner values
-        spinner.topValue = spinner.topValue + spinner.topValue * scalingValue;
-        spinner.leftValue = spinner.leftValue + spinner.leftValue * scalingValue;
-        spinner.bottomValue = spinner.bottomValue + spinner.bottomValue * scalingValue;
-        spinner.rightValue = spinner.rightValue + spinner.rightValue * scalingValue;
-    }
+    // change range and mulitplier based on get value
+    
+    
+    // update new spinner values
+    spinner.topValue = (arc4random() % range + 2) * multiplier;
+    spinner.leftValue = (arc4random() % range + 2) * multiplier;
+    spinner.bottomValue = (arc4random() % range + 2) * multiplier;
+    spinner.rightValue = (arc4random() % range - 2) * multiplier;
+    
     return spinner;
 }
 

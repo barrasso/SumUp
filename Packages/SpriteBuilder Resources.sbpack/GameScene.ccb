@@ -201,7 +201,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>Get Label</string>
+						<string>Score Label</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -261,7 +261,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>GET</string>
+									<string>SCORE</string>
 									<false/>
 								</array>
 							</dict>
@@ -479,9 +479,9 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>Get Number Label</string>
+						<string>Score Number Label</string>
 						<key>memberVarAssignmentName</key>
-						<string>_getSumLabel</string>
+						<string>_scoreLabel</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -757,7 +757,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>Score Label</string>
+						<string>Get Label</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -817,7 +817,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>SCORE</string>
+									<string>GET</string>
 									<false/>
 								</array>
 							</dict>
@@ -1033,9 +1033,9 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>Score Number Label</string>
+						<string>Get Number Label</string>
 						<key>memberVarAssignmentName</key>
-						<string>_scoreLabel</string>
+						<string>_getSumLabel</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -3211,7 +3211,7 @@
 				<key>displayName</key>
 				<string>Spinner Container</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_spinnerContainer</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -3276,6 +3276,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -3371,8 +3373,6 @@
 								<real>45</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

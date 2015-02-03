@@ -15,7 +15,7 @@
 @property (assign, nonatomic) int bottomValue;
 @property (assign, nonatomic) int rightValue;
 
-- (Spinner *)updateSpinnerValues:(Spinner *)spinner withNumberOfGets:(int)numberOfGets;
+- (Spinner *)updateSpinnerValues:(Spinner *)spinner withGetValue:(int)getValue;
 - (int)calculateNewNumberValue:(Spinner *)spinner withCurrentGetValue:(int)getValue;
 
 @end

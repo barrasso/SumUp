@@ -10,8 +10,6 @@
 #import "FlyingNumber.h"
 #import "Spinner.h"
 
-static const float scalingValue = 0.50f;
-
 @implementation GameScene
 {
     // spinner
@@ -34,10 +32,16 @@ static const float scalingValue = 0.50f;
     // game values
     int _currentSumValue;
     int _currentGetValue;
+    int _currentScore;
     int _numberOfGets;
+    
+    // scalars
+    int _range;
+    int _multiplier;
     
     // flags
     BOOL _isGameOver;
+    BOOL _didSwipeDown;
 }
 
 #pragma mark - Lifecycle
@@ -54,6 +58,11 @@ static const float scalingValue = 0.50f;
     
     // init flying numbers array
     _allFlyingNumbers = [[NSMutableArray alloc] init];
+    
+    // add gesture recognizer
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDown)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
+    [[CCDirector sharedDirector].view addGestureRecognizer: swipeGesture];
     
     // disable retry
     _retryButton.visible = NO;
@@ -93,51 +102,63 @@ static const float scalingValue = 0.50f;
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
 {
-    switch (_position)
-    {
-        case SpinnerPositionZero:
-            // rotate spinner and change position
-            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate90"];
-            _position = SpinnerPositionOne;
-            
-            // shift numbers and update labels
-            [self shiftSpinnerValues];
-            [self updateSpinnerLabels];
-            
-            break;
-        case SpinnerPositionOne:
-            // rotate spinner and change position
-            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate180"];
-            _position = SpinnerPositionTwo;
-            
-            // shift numbers and update labels
-            [self shiftSpinnerValues];
-            [self updateSpinnerLabels];
-            
-            break;
-        case SpinnerPositionTwo:
-            // rotate spinner and change position
-            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate270"];
-            _position = SpinnerPositionThree;
-            
-            // shift numbers and update labels
-            [self shiftSpinnerValues];
-            [self updateSpinnerLabels];
-            
-            break;
-        case SpinnerPositionThree:
-            // rotate spinner and change position
-            [[self animationManager] runAnimationsForSequenceNamed:@"Rotate360"];
-            _position = SpinnerPositionZero;
-            
-            // shift numbers and update labels
-            [self shiftSpinnerValues];
-            [self updateSpinnerLabels];
-            
-            break;
-        default:
-            break;
+    CGPoint touchLocation = [touch locationInNode:self];
+    
+    if (CGRectContainsPoint(_spinnerContainer.boundingBox, touchLocation)) {
+        
+        switch (_position)
+        {
+            case SpinnerPositionZero:
+                // rotate spinner and change position
+                [[self animationManager] runAnimationsForSequenceNamed:@"Rotate90"];
+                _position = SpinnerPositionOne;
+                
+                // shift numbers and update labels
+                [self shiftSpinnerValues];
+                [self updateSpinnerLabels];
+                
+                break;
+            case SpinnerPositionOne:
+                // rotate spinner and change position
+                [[self animationManager] runAnimationsForSequenceNamed:@"Rotate180"];
+                _position = SpinnerPositionTwo;
+                
+                // shift numbers and update labels
+                [self shiftSpinnerValues];
+                [self updateSpinnerLabels];
+                
+                break;
+            case SpinnerPositionTwo:
+                // rotate spinner and change position
+                [[self animationManager] runAnimationsForSequenceNamed:@"Rotate270"];
+                _position = SpinnerPositionThree;
+                
+                // shift numbers and update labels
+                [self shiftSpinnerValues];
+                [self updateSpinnerLabels];
+                
+                break;
+            case SpinnerPositionThree:
+                // rotate spinner and change position
+                [[self animationManager] runAnimationsForSequenceNamed:@"Rotate360"];
+                _position = SpinnerPositionZero;
+                
+                // shift numbers and update labels
+                [self shiftSpinnerValues];
+                [self updateSpinnerLabels];
+                
+                break;
+            default:
+                break;
+        }
     }
+}
+
+- (void)swipeDown
+{
+    // pull the number down hard
+    [_flyingNumber.physicsBody applyForce:ccp(0.0f, -50000.f)];
+    _didSwipeDown = YES;
 }
 
 #pragma mark - Game Utility Methods
@@ -147,15 +168,16 @@ static const float scalingValue = 0.50f;
     // reset values
     _isGameOver = NO;
     _numberOfGets = 0;
+    _currentScore = 0;
     _currentSumValue = 0;
-    _currentGetValue = ((arc4random() % 4) + 4);
+    _currentGetValue = 10;
     _position = SpinnerPositionZero;
 
     // spawn initial number
     [self spawnInitialNumber];
     
     // set labels
-    self.scoreLabel.string = [NSString stringWithFormat:@"%i",_numberOfGets];
+    self.scoreLabel.string = [NSString stringWithFormat:@"%i",_currentScore];
     self.getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
     [self updateSpinnerLabels];
 }
@@ -163,7 +185,7 @@ static const float scalingValue = 0.50f;
 - (void)spawnInitialNumber
 {
     // update the spinner values and labels
-    _spinner = [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
+    _spinner = [_spinner updateSpinnerValues:_spinner withGetValue:_currentGetValue];
     [self updateSpinnerLabels];
     
     // spawn new flying number with updated value
@@ -241,16 +263,28 @@ static const float scalingValue = 0.50f;
     {
         CCLOG(@"NEXT!");
         
-        // calculate new get value and update label
-        _currentGetValue = (_currentGetValue + _currentGetValue * scalingValue);
-        self.getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
-        
         // increment number of gets
         _numberOfGets++;
-        self.scoreLabel.string = [NSString stringWithFormat:@"%i",_numberOfGets];
+        
+        if (_didSwipeDown) {
+            _currentScore = _currentScore + 15;
+            _didSwipeDown = NO;
+        } else {
+            _currentScore = _currentScore + 10;
+        }
+        
+        // update score
+        self.scoreLabel.string = [NSString stringWithFormat:@"%i",_currentScore];
+        
+        // set new range and multiplier based on number of gets
+        [self updateRangeAndMultiplier:_numberOfGets];
+        
+        // calculate new get value and update label
+        _currentGetValue = ((arc4random() % _range + 1) * _multiplier);
+        self.getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
         
         // update the spinner values and labels
-        _spinner = [_spinner updateSpinnerValues:_spinner withNumberOfGets:_numberOfGets];
+        _spinner = [_spinner updateSpinnerValues:_spinner withGetValue:_currentGetValue];
         [self updateSpinnerLabels];
         
         // spawn new flying number with updated value
@@ -282,15 +316,25 @@ static const float scalingValue = 0.50f;
     // figure out user sum
     _currentSumValue = number.numberValue + _spinner.topValue;
     
-    // update score label
-    self.scoreLabel.string = [NSString stringWithFormat:@"%i",_numberOfGets];
-    
-    // play +1 score animation????????
-    
-    
     // must number remove from scene
     [_allFlyingNumbers removeObject:number];
     [number removeFromParent];
+}
+
+- (void)updateRangeAndMultiplier:(int)gets
+{
+    switch (gets) {
+        case 0:
+            // do nothing
+            break;
+        case 1:
+            _range = 10;
+            _multiplier = 5;
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)retry
@@ -298,11 +342,6 @@ static const float scalingValue = 0.50f;
     CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
     CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1];
     [[CCDirector sharedDirector] replaceScene:gameScene withTransition:transition];
-}
-
-- (void)doCrazyStuffEachScoreIncrement
-{
-    
 }
 
 @end
