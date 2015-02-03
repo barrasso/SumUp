@@ -16,15 +16,18 @@ static const float scalingValue = 0.50f;
 {
     // spinner
     Spinner *_spinner;
+    CCNode *_centerNode;
     CCNode *_spinnerContainer;
     SpinnerPosition _position;
-    CCNode *_centerNode;
     
     // numbers
     FlyingNumber *_flyingNumber;
     CCPhysicsNode *_physicsNode;
     NSMutableArray *_allFlyingNumbers;
 
+    // buttons
+    CCButton *_retryButton;
+    
     // Screen Size
     CGSize _screenSize;
     
@@ -51,6 +54,10 @@ static const float scalingValue = 0.50f;
     
     // init flying numbers array
     _allFlyingNumbers = [[NSMutableArray alloc] init];
+    
+    // disable retry
+    _retryButton.visible = NO;
+    _retryButton.userInteractionEnabled = NO;
     
     // start new game
     [self startNewGame];
@@ -219,12 +226,16 @@ static const float scalingValue = 0.50f;
 
 - (void)checkGameScore:(int)currentSum
 {
-    if (currentSum > _currentGetValue)
+    if (currentSum > _currentGetValue || currentSum < _currentGetValue)
     {
         CCLOG(@"YOU LOSE");
         
         // game over
         _isGameOver = YES;
+        
+        // disable retry
+        _retryButton.visible = YES;
+        _retryButton.userInteractionEnabled = YES;
     }
     else if (currentSum == _currentGetValue)
     {
