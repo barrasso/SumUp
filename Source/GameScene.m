@@ -23,10 +23,11 @@
     CCPhysicsNode *_physicsNode;
     NSMutableArray *_allFlyingNumbers;
 
-    // buttons
-    CCButton *_retryButton;
+    // icons
+    CCNode *_retryIcon;
     
-    // Screen Size
+    // Screen
+    CGPoint _touchLocation;
     CGSize _screenSize;
     
     // game values
@@ -42,6 +43,7 @@
     // flags
     BOOL _isGameOver;
     BOOL _didSwipeDown;
+    BOOL _didTouchSpinner;
 }
 
 #pragma mark - Lifecycle
@@ -65,8 +67,8 @@
     [[CCDirector sharedDirector].view addGestureRecognizer: swipeGesture];
     
     // disable retry
-    _retryButton.visible = NO;
-    _retryButton.userInteractionEnabled = NO;
+    _retryIcon.visible = NO;
+    _retryIcon.userInteractionEnabled = NO;
     
     // start new game
     [self startNewGame];
@@ -102,9 +104,18 @@
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
 {
-    CGPoint touchLocation = [touch locationInNode:self];
+    _touchLocation = [touch locationInNode:self];
     
-    if (CGRectContainsPoint(_spinnerContainer.boundingBox, touchLocation)) {
+    // check for spinner container
+    if (CGRectContainsPoint(_spinnerContainer.boundingBox, _touchLocation)) {
+        
+        // check for game over
+        if (_isGameOver) {
+            [self retry];
+        }
+        
+        // set flag
+        _didTouchSpinner = YES;
         
         switch (_position)
         {
@@ -151,14 +162,18 @@
             default:
                 break;
         }
+    } else {
+        _didTouchSpinner = NO;
     }
 }
 
 - (void)swipeDown
 {
-    // pull the number down hard
-    [_flyingNumber.physicsBody applyForce:ccp(0.0f, -50000.f)];
-    _didSwipeDown = YES;
+    if (!_didTouchSpinner) {
+        // pull the number down hard
+        [_flyingNumber.physicsBody applyForce:ccp(0.0f, -50000.f)];
+        _didSwipeDown = YES;
+    }
 }
 
 #pragma mark - Game Utility Methods
@@ -256,8 +271,8 @@
         _isGameOver = YES;
         
         // disable retry
-        _retryButton.visible = YES;
-        _retryButton.userInteractionEnabled = YES;
+        _retryIcon.visible = YES;
+        _retryIcon.userInteractionEnabled = YES;
     }
     else if (currentSum == _currentGetValue)
     {
