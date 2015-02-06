@@ -30,14 +30,22 @@
 
 - (void)didLoadFromCCB
 {
-    self.userInteractionEnabled = YES;
-    self.multipleTouchEnabled = YES;    
+    self.userInteractionEnabled = NO;
+    self.multipleTouchEnabled = NO;
 }
 
 - (void)onExit
 {
     // deallocate
     [super onExit];
+}
+
+#pragma mark - Callbacks
+
+- (void)enableInteraction
+{
+    self.userInteractionEnabled = YES;
+    self.multipleTouchEnabled = YES;
 }
 
 #pragma mark - Touch Handling

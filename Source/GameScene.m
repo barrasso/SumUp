@@ -62,7 +62,8 @@
     _allFlyingNumbers = [[NSMutableArray alloc] init];
     
     // add gesture recognizer
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDown)];
+    UISwipeGestureRecognizer *swipeGesture =
+    [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDown)];
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
     [[CCDirector sharedDirector].view addGestureRecognizer: swipeGesture];
     
@@ -269,10 +270,17 @@
         
         // game over
         _isGameOver = YES;
+        self.userInteractionEnabled = NO;
         
         // disable retry
         _retryIcon.visible = YES;
         _retryIcon.userInteractionEnabled = YES;
+        
+        [[self animationManager] runAnimationsForSequenceNamed:@"GameOver"];
+        
+        [self scheduleBlock:^(CCTimer *timer) {
+            self.userInteractionEnabled = YES;
+        } delay:1.5];
     }
     else if (currentSum == _currentGetValue)
     {
@@ -282,10 +290,10 @@
         _numberOfGets++;
         
         if (_didSwipeDown) {
-            _currentScore = _currentScore + 15;
+            _currentScore = _currentScore + ((_currentGetValue) + (_currentGetValue * 0.5));
             _didSwipeDown = NO;
         } else {
-            _currentScore = _currentScore + 10;
+            _currentScore = _currentScore + (_currentGetValue);
         }
         
         // update score
