@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "TutorialLayer.h"
 #import "FlyingNumber.h"
 #import "Spinner.h"
 
@@ -23,6 +24,9 @@
     CCPhysicsNode *_physicsNode;
     NSMutableArray *_allFlyingNumbers;
 
+    // tutorial
+    TutorialLayer *_tutorialLayer;
+    
     // icons
     CCNode *_retryIcon;
     
@@ -86,6 +90,22 @@
 
 - (void)update:(CCTime)delta
 {
+    // handle initial tutorial number
+    if (!self.hasSeenTutorial) {
+        
+        if (_tutorialLayer.currentState == 0 || _tutorialLayer.currentState == 1) {
+        
+            for (FlyingNumber *number in _allFlyingNumbers)
+            {
+                if (number.position.y <= (_screenSize.height * 0.8)) {
+                    // hold number in position
+                    number.physicsBody.velocity = ccp(0,0);
+                }
+            }
+        }
+    }
+    
+    // handle numbers on gameplay
     if (!_isGameOver) {
         
         for (FlyingNumber *number in _allFlyingNumbers)
@@ -108,8 +128,61 @@
 {
     _touchLocation = [touch locationInNode:self];
     
-    // check for spinner container
-    if (CGRectContainsPoint(_spinnerContainer.boundingBox, _touchLocation)) {
+    /***** TUTORIAL STATE *****/
+    if (!self.hasSeenTutorial) {
+        
+        if (_tutorialLayer.currentState == 0) {
+            _tutorialLayer.currentState = 1;
+            [_tutorialLayer performActionForState:_tutorialLayer.currentState];
+            return;
+        }
+        
+        if ((_tutorialLayer.currentState == 1) && (CGRectContainsPoint(_spinnerContainer.boundingBox, _touchLocation))) {
+            
+            // set flag
+            _didTouchSpinner = YES;
+            
+            switch (_position)
+            {
+                case SpinnerPositionZero:
+                    // rotate spinner and change position
+                    [[self animationManager] runAnimationsForSequenceNamed:@"Rotate90"];
+                    _position = SpinnerPositionOne;
+                    
+                    // shift numbers and update labels
+                    [self shiftSpinnerValues];
+                    [self updateSpinnerLabels];
+                    
+                    break;
+                case SpinnerPositionOne:
+                    // rotate spinner and change position
+                    [[self animationManager] runAnimationsForSequenceNamed:@"Rotate180"];
+                    _position = SpinnerPositionTwo;
+                    
+                    // shift numbers and update labels
+                    [self shiftSpinnerValues];
+                    [self updateSpinnerLabels];
+                    
+                    // now enable swipe down
+                    _tutorialLayer.currentState = 2;
+                    [_tutorialLayer performActionForState:_tutorialLayer.currentState];
+                    
+                    break;
+                case SpinnerPositionTwo:
+                    // DON'T SPIN AGAIN
+
+                    
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            _didTouchSpinner = NO;
+        }
+    }
+
+    /***** NORMAL GAMEPLAY STATE *****/
+    if (self.hasSeenTutorial && (CGRectContainsPoint(_spinnerContainer.boundingBox, _touchLocation))) {
         
         // check for game over
         if (_isGameOver) {
@@ -171,6 +244,12 @@
 
 - (void)swipeDown
 {
+    if (!_didTouchSpinner && _tutorialLayer.currentState == 2) {
+        // pull the number down hard
+        [_flyingNumber.physicsBody applyForce:ccp(0.0f, -50000.f)];
+        _didSwipeDown = YES;
+    }
+    
     if (!_didTouchSpinner) {
         // pull the number down hard
         [_flyingNumber.physicsBody applyForce:ccp(0.0f, -50000.f)];
@@ -202,9 +281,20 @@
     self.hasSeenTutorial = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HasSeenTutorial"] boolValue];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    if (self.hasSeenTutorial) {
-        // load tutorial layer
-        
+    if (!self.hasSeenTutorial)
+    {
+        [self scheduleBlock:^(CCTimer *timer) {
+            
+            // load tutorial layer
+            _tutorialLayer = (TutorialLayer *)[CCBReader load:@"TutorialLayer"];
+            [self addChild:_tutorialLayer];
+            [_tutorialLayer performActionForState:_tutorialLayer.currentState];
+            
+            // load tutorial values
+            _spinner.bottomValue = 5;
+            _flyingNumber.numberValue = 5;
+            
+        } delay:5.0];
     }
 }
 
@@ -320,14 +410,22 @@
         _spinner = [_spinner updateSpinnerValues:_spinner withGetValue:_currentGetValue];
         [self updateSpinnerLabels];
         
-        // spawn new flying number with updated value
-        _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
-        [_flyingNumber updateNumber:_flyingNumber withNewValue:[_spinner calculateNewNumberValue:_spinner withCurrentGetValue:_currentGetValue]];
         
-        // determine position and add to game
-        _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
-        [_allFlyingNumbers addObject:_flyingNumber];
-        [_physicsNode addChild:_flyingNumber];
+        // if in tutorial
+        if (_tutorialLayer.currentState == 2) {
+            _tutorialLayer.currentState = 3;
+            [_tutorialLayer performActionForState:_tutorialLayer.currentState];
+        } else {
+            
+            // spawn new flying number with updated value
+            _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+            [_flyingNumber updateNumber:_flyingNumber withNewValue:[_spinner calculateNewNumberValue:_spinner withCurrentGetValue:_currentGetValue]];
+            
+            // determine position and add to game
+            _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
+            [_allFlyingNumbers addObject:_flyingNumber];
+            [_physicsNode addChild:_flyingNumber];
+        }
         
         // reset sum
         _currentSumValue = 0;
