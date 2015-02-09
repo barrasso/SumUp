@@ -468,6 +468,8 @@
     }
 }
 
+#pragma mark - Selectors
+
 - (void)retry
 {
     CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];

@@ -27,6 +27,10 @@
     self.label4.visible = NO;
     self.label5.visible = NO;
     self.label6.visible = NO;
+    self.retryTutorialButton.visible = NO;
+    self.retryTutorialButton.userInteractionEnabled = NO;
+    self.gotItButton.visible = NO;
+    self.gotItButton.userInteractionEnabled = NO;
 }
 
 - (void)onExit
@@ -35,20 +39,37 @@
     [super onExit];
 }
 
-#pragma mark - Tutorial Action Methods
+#pragma mark - Selectors
+
+- (void)resumeGameplay
+{
+    // set tutorial mode to seen
+    
+    // remove layer
+    CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
+    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1];
+    [[CCDirector sharedDirector] replaceScene:gameScene withTransition:transition];
+}
+
+- (void)retryTutorial
+{
+    CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
+    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1];
+    [[CCDirector sharedDirector] replaceScene:gameScene withTransition:transition];
+}
+
+#pragma mark - Tutorial State Methods
 
 - (void)performActionForState:(TutorialState)state
 {
     // base next action on state
     switch (state) {
         case StateZero:
-            
             CCLOG(@"State: %ld",self.currentState);
             
             break;
             
         case StateOne:
-            //
             CCLOG(@"State: %ld",self.currentState);
             
             // show and hide labels
@@ -60,21 +81,24 @@
             break;
             
         case StateTwo:
-            //
             CCLOG(@"State: %ld",self.currentState);
             
+            // show and hide labels
             self.label4.visible = NO;
             self.label5.visible = YES;
 
             break;
             
         case StateThree:
-            //
             CCLOG(@"State: %ld",self.currentState);
             
             // finish tutorial
             self.label5.visible = NO;
             self.label6.visible = YES;
+            self.retryTutorialButton.visible = YES;
+            self.retryTutorialButton.userInteractionEnabled = YES;
+            self.gotItButton.visible = YES;
+            self.gotItButton.userInteractionEnabled = YES;
             break;
             
         default:

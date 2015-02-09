@@ -30,6 +30,10 @@ typedef NS_ENUM(NSInteger, TutorialState)
 @property (strong, nonatomic) CCLabelTTF *label5;
 @property (strong, nonatomic) CCLabelTTF *label6;
 
+// buttons
+@property (strong, nonatomic) CCButton *gotItButton;
+@property (strong, nonatomic) CCButton *retryTutorialButton;
+
 // tutorial state
 - (void)performActionForState:(TutorialState)state;
 
