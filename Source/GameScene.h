@@ -19,6 +19,9 @@ typedef NS_ENUM(NSInteger, SpinnerPosition)
     SpinnerPositionThree = 3
 };
 
+// tutorial enabled flag
+@property (assign) BOOL hasSeenTutorial;
+
 // labels
 @property (strong, nonatomic) CCLabelTTF *topLabel;
 @property (strong, nonatomic) CCLabelTTF *rightLabel;

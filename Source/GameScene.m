@@ -44,6 +44,7 @@
     BOOL _isGameOver;
     BOOL _didSwipeDown;
     BOOL _didTouchSpinner;
+    BOOL _isTutorialModeActive;
 }
 
 #pragma mark - Lifecycle
@@ -196,6 +197,15 @@
     self.scoreLabel.string = [NSString stringWithFormat:@"%i",_currentScore];
     self.getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
     [self updateSpinnerLabels];
+    
+    // load tutorial statuses
+    self.hasSeenTutorial = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HasSeenTutorial"] boolValue];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if (self.hasSeenTutorial) {
+        // load tutorial layer
+        
+    }
 }
 
 - (void)spawnInitialNumber
