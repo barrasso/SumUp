@@ -101,7 +101,7 @@
         
             for (FlyingNumber *number in _allFlyingNumbers)
             {
-                if (number.position.y <= (_screenSize.height * 0.8)) {
+                if (number.position.y <= (_screenSize.height * 0.80)) {
                     // hold number in position
                     number.physicsBody.velocity = ccp(0,0);
                 }
@@ -174,7 +174,6 @@
                     break;
                 case SpinnerPositionTwo:
                     // DON'T SPIN AGAIN
-
                     
                     break;
                 default:
@@ -288,9 +287,12 @@
             _tutorialLayer = (TutorialLayer *)[CCBReader load:@"TutorialLayer"];
             [self addChild:_tutorialLayer];
             [_tutorialLayer performActionForState:_tutorialLayer.currentState];
-            
+            [self scheduleOnce:@selector(enableInteraction) delay:2];
+
         } delay:5.0];
+        
     } else {
+        [self enableInteraction];
         [self updateSpinnerLabels];
     }
 }

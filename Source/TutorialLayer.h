@@ -27,8 +27,6 @@ typedef NS_ENUM(NSInteger, TutorialState)
 @property (strong, nonatomic) CCLabelTTF *label2;
 @property (strong, nonatomic) CCLabelTTF *label3;
 @property (strong, nonatomic) CCLabelTTF *label4;
-@property (strong, nonatomic) CCLabelTTF *label5;
-@property (strong, nonatomic) CCLabelTTF *label6;
 
 // buttons
 @property (strong, nonatomic) CCButton *gotItButton;

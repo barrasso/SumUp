@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>5</integer>
+	<integer>0</integer>
 	<key>docDimensionsType</key>
 	<integer>0</integer>
 	<key>fileType</key>
@@ -277,7 +277,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
+									<real>0.25</real>
 									<real>0.92500001192092896</real>
 									<integer>0</integer>
 									<integer>2</integer>
@@ -354,7 +354,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>1</real>
+								<real>0.0</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -366,7 +366,7 @@
 									<real>0.78431373834609985</real>
 									<real>0.78431373834609985</real>
 									<real>0.78431373834609985</real>
-									<real>1</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -609,7 +609,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
+									<real>0.25</real>
 									<real>0.85000002384185791</real>
 									<integer>0</integer>
 									<integer>2</integer>
@@ -686,7 +686,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>1</real>
+								<real>0.0</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -698,7 +698,7 @@
 									<real>0.78431373834609985</real>
 									<real>0.78431373834609985</real>
 									<real>0.78431373834609985</real>
-									<real>1</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -806,6 +806,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>
@@ -3789,24 +3791,7 @@
 			<key>callbackChannel</key>
 			<dict>
 				<key>keyframes</key>
-				<array>
-					<dict>
-						<key>easing</key>
-						<dict>
-							<key>type</key>
-							<integer>0</integer>
-						</dict>
-						<key>time</key>
-						<real>2</real>
-						<key>type</key>
-						<integer>12</integer>
-						<key>value</key>
-						<array>
-							<string>enableInteraction</string>
-							<integer>1</integer>
-						</array>
-					</dict>
-				</array>
+				<array/>
 				<key>type</key>
 				<integer>12</integer>
 			</dict>
@@ -4016,7 +4001,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>1</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
