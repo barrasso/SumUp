@@ -1216,8 +1216,6 @@ number down! </string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -1384,7 +1382,7 @@ number down! </string>
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.69999998807907104</real>
+							<real>0.64999997615814209</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1440,7 +1438,7 @@ number down! </string>
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>30</real>
+							<real>24</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1580,6 +1578,8 @@ number down! </string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
