@@ -37,6 +37,8 @@
 - (void)resumeGameplay
 {
     // set tutorial mode to seen
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasSeenTutorial"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     // remove layer
     CCScene *gameScene = (CCScene *)[CCBReader loadAsScene:@"GameScene"];
