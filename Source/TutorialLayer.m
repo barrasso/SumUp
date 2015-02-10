@@ -19,14 +19,7 @@
     // init tutorial state
     self.currentState = StateZero;
     
-    // show and hide labels
-    self.label1.visible = YES;
-    self.label2.visible = YES;
-    self.label3.visible = YES;
-    
-    self.label4.visible = NO;
-    self.label5.visible = NO;
-    self.label6.visible = NO;
+    // disable buttons
     self.retryTutorialButton.visible = NO;
     self.retryTutorialButton.userInteractionEnabled = NO;
     self.gotItButton.visible = NO;
@@ -66,35 +59,20 @@
     switch (state) {
         case StateZero:
             CCLOG(@"State: %ld",self.currentState);
-            
             break;
             
         case StateOne:
-            CCLOG(@"State: %ld",self.currentState);
-            
-            // show and hide labels
-            self.label1.visible = NO;
-            self.label2.visible = NO;
-            self.label3.visible = NO;
-            self.label4.visible = YES;
-            
+            [[self animationManager] runAnimationsForSequenceNamed:@"StateOne"];
             break;
             
         case StateTwo:
-            CCLOG(@"State: %ld",self.currentState);
-            
-            // show and hide labels
-            self.label4.visible = NO;
-            self.label5.visible = YES;
-
+            [[self animationManager] runAnimationsForSequenceNamed:@"StateTwo"];
             break;
             
         case StateThree:
-            CCLOG(@"State: %ld",self.currentState);
-            
-            // finish tutorial
-            self.label5.visible = NO;
-            self.label6.visible = YES;
+            [[self animationManager] runAnimationsForSequenceNamed:@"StateThree"];
+
+            // enable buttons
             self.retryTutorialButton.visible = YES;
             self.retryTutorialButton.userInteractionEnabled = YES;
             self.gotItButton.visible = YES;

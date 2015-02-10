@@ -66,6 +66,10 @@
     // init flying numbers array
     _allFlyingNumbers = [[NSMutableArray alloc] init];
     
+    // load tutorial statuses
+    self.hasSeenTutorial = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HasSeenTutorial"] boolValue];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     // add gesture recognizer
     UISwipeGestureRecognizer *swipeGesture =
     [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDown)];
@@ -275,11 +279,6 @@
     // set labels
     self.scoreLabel.string = [NSString stringWithFormat:@"%i",_currentScore];
     self.getSumLabel.string = [NSString stringWithFormat:@"%i",_currentGetValue];
-    [self updateSpinnerLabels];
-    
-    // load tutorial statuses
-    self.hasSeenTutorial = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HasSeenTutorial"] boolValue];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     if (!self.hasSeenTutorial)
     {
@@ -290,23 +289,35 @@
             [self addChild:_tutorialLayer];
             [_tutorialLayer performActionForState:_tutorialLayer.currentState];
             
-            // load tutorial values
-            _spinner.bottomValue = 5;
-            _flyingNumber.numberValue = 5;
-            
         } delay:5.0];
+    } else {
+        [self updateSpinnerLabels];
     }
 }
 
 - (void)spawnInitialNumber
 {
-    // update the spinner values and labels
-    _spinner = [_spinner updateSpinnerValues:_spinner withGetValue:_currentGetValue];
-    [self updateSpinnerLabels];
-    
-    // spawn new flying number with updated value
-    _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
-    [_flyingNumber updateNumber:_flyingNumber withNewValue:[_spinner calculateNewNumberValue:_spinner withCurrentGetValue:_currentGetValue]];
+    if (self.hasSeenTutorial) {
+        // update the spinner values and labels
+        _spinner = [_spinner updateSpinnerValues:_spinner withGetValue:_currentGetValue];
+        [self updateSpinnerLabels];
+        
+        // spawn new flying number with updated value
+        _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+        [_flyingNumber updateNumber:_flyingNumber withNewValue:[_spinner calculateNewNumberValue:_spinner withCurrentGetValue:_currentGetValue]];
+        
+    } else {
+        // load spinner tutorial values
+        _spinner.topValue = 0;
+        _spinner.leftValue = 1;
+        _spinner.rightValue = 3;
+        _spinner.bottomValue = 5;
+        [self updateSpinnerLabels];
+        
+        // spawn new flying number with updated tutorial value
+        _flyingNumber = (FlyingNumber *)[CCBReader load:@"FlyingNumber"];
+        [_flyingNumber updateNumber:_flyingNumber withNewValue:5];
+    }
     
     // determine position and add to game
     _flyingNumber.position = CGPointMake(_screenSize.width * 0.5, _screenSize.height * 1.2);
