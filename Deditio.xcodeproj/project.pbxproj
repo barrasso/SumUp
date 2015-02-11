@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04603F1D1A86DB5D0068B14C /* TutorialLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04603F1C1A86DB5D0068B14C /* TutorialLayer.m */; };
+		04603F631A8BCC9E0068B14C /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04603F621A8BCC9E0068B14C /* level1.plist */; };
 		04CEADB01A744DD200947B0A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CEADAF1A744DD200947B0A /* Media.xcassets */; };
 		04CEADC11A74611800947B0A /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADC01A74611800947B0A /* GameScene.m */; };
 		04CEADD41A74AA9000947B0A /* Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEADD31A74AA9000947B0A /* Spinner.m */; };
@@ -163,6 +164,7 @@
 /* Begin PBXFileReference section */
 		04603F1B1A86DB5D0068B14C /* TutorialLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialLayer.h; path = Source/TutorialLayer.h; sourceTree = "<group>"; };
 		04603F1C1A86DB5D0068B14C /* TutorialLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialLayer.m; path = Source/TutorialLayer.m; sourceTree = "<group>"; };
+		04603F621A8BCC9E0068B14C /* level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level1.plist; sourceTree = "<group>"; };
 		04CEADAF1A744DD200947B0A /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		04CEADBF1A74611800947B0A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Source/GameScene.h; sourceTree = "<group>"; };
 		04CEADC01A74611800947B0A /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Source/GameScene.m; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				B73789911807667A0076A88C /* Icons */,
 				B737893A180761570076A88C /* Published-iOS */,
 				B78A0B0F198AF87200C63841 /* Published-Android */,
+				04603F621A8BCC9E0068B14C /* level1.plist */,
 			);
 			name = Resources;
 			path = Source/Resources;
@@ -785,6 +788,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				04603F631A8BCC9E0068B14C /* level1.plist in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,

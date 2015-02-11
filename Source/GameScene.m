@@ -66,6 +66,13 @@
     // init flying numbers array
     _allFlyingNumbers = [[NSMutableArray alloc] init];
     
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"level1" ofType:@"plist"];
+    NSLog(@"Path: %@",path);
+    NSDictionary *level1 = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSLog(@"Dictionary: %@",level1);
+    NSArray *gets = [level1 objectForKey:@"Gets"];
+    NSLog(@"Gets: %@",gets);
+    
     // load tutorial statuses
     self.hasSeenTutorial = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HasSeenTutorial"] boolValue];
     [[NSUserDefaults standardUserDefaults] synchronize];
